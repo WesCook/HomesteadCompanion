@@ -1,0 +1,16 @@
+[
+{
+  "modid": "homesteadcompanion",
+  "name": "Homestead Companion",
+  "description": "An addon mod to bridge compatibility in the Homestead modpack.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "https://github.com/WesCook/homestead-companion",
+  "updateUrl": "",
+  "authorList": ["Wes Cook"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
