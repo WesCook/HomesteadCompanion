@@ -11,6 +11,10 @@ An addon mod to bridge compatibility in the Homestead modpack.
 
 ## Changelog
 
+[v1.1](https://github.com/WesCook/homestead-companion/releases/tag/v1.1) - 2017-03-24
+
+* Relighting torches now respects block orientation
+
 [v1.0](https://github.com/WesCook/homestead-companion/releases/tag/v1.0) - 2017-02-22
 
 * Initial release
