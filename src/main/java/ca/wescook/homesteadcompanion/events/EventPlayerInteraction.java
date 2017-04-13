@@ -15,7 +15,9 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+import java.util.HashMap;
 import java.util.Map;
+
 import static net.minecraft.block.BlockTorch.FACING;
 
 public class EventPlayerInteraction {
@@ -29,39 +31,54 @@ public class EventPlayerInteraction {
 
 		// If item is used on campfire
 		if (Loader.isModLoaded("ToughAsNails") && blockState.getBlock().equals(Block.getBlockFromName("ToughAsNails:campfire")))
-			lightTorchOnCampfire(event, world, player, stack, blockState);
+			campfireCraft(event, world, player, stack, blockState);
 		// If item is used on unlit torch
 		else if (Loader.isModLoaded("RealisticTorches") && blockState.getBlock().equals(Block.getBlockFromName("RealisticTorches:TorchUnlit")))
 			relightTorchOnGround(event, world, player, stack, blockState);
 	}
 
-	private void lightTorchOnCampfire(PlayerInteractEvent.RightClickBlock event, World world, EntityPlayer player, ItemStack stack, IBlockState blockState) {
-		// Get item instances (may be null if mod Realistic Torches isn't loaded)
-		Item unlitTorch = Item.getByNameOrId("RealisticTorches:TorchUnlit");
-		Item litTorch = Item.getByNameOrId("RealisticTorches:TorchLit");
+	private void campfireCraft(PlayerInteractEvent.RightClickBlock event, World world, EntityPlayer player, ItemStack stack, IBlockState blockState) {
+		// Define item ingredient/result list
+		Map<Item, Item> campfireItems = new HashMap<Item, Item>();
 
-		// Get out if not using stick or unlit torch
-		if (stack == null || !(stack.getItem().equals(Items.STICK) || stack.getItem().equals(unlitTorch)))
+		// Add entries
+		campfireItems.put(Item.getItemFromBlock(Blocks.SAND), Items.GLASS_BOTTLE); // Cooking sand into glass
+		if (Loader.isModLoaded("RealisticTorches")) { // Light realistic torches
+			campfireItems.put(Items.STICK, Item.getByNameOrId("RealisticTorches:TorchLit")); // Turn sticks into lit torches
+			campfireItems.put(Item.getByNameOrId("RealisticTorches:TorchUnlit"), Item.getByNameOrId("RealisticTorches:TorchLit")); // Turn unlit torches into lit torches
+		}
+		else // Create normal torch
+			campfireItems.put(Items.STICK, Item.getItemFromBlock(Blocks.TORCH));
+
+		// If no item in hand, get out
+		if (stack == null)
 			return;
 
-		// Check that fire is burning and ignite torch
+		// If fire is not burning, get out
 		Comparable burningStatus = getProperty(blockState, "burning");
-		if (burningStatus != null && burningStatus.equals(true)) {
-			if (!world.isRemote) { // Only on server
-				// Remove one stick/unlit torch
-				if (!player.isCreative())
-					--stack.stackSize;
+		if (burningStatus == null || burningStatus.equals(false))
+			return;
 
-				// Ignites torch
-				if (litTorch != null) // If Realistic Torches mod is loaded
-					player.inventory.addItemStackToInventory(new ItemStack(litTorch)); // Give lit torch
-				else
-					player.inventory.addItemStackToInventory(new ItemStack(Blocks.TORCH)); // Give vanilla torch
+		// Craft item
+		for (Map.Entry<Item, Item> campfireItem : campfireItems.entrySet()) { // Iterate through crafting list
+			if (campfireItem.getKey().equals(stack.getItem())) { // If it matches
+				// Cancel block place event
+				if (event.isCancelable())
+					event.setCanceled(true);
+
+				// Only on server
+				if (!world.isRemote) {
+					// Remove crafting input
+					if (!player.isCreative())
+						--stack.stackSize;
+
+					// Craft item
+					player.inventory.addItemStackToInventory(new ItemStack(campfireItem.getValue()));
+
+					// Item was already found, can exit
+					return;
+				}
 			}
-
-			// Don't place block
-			if (event.isCancelable() && stack.getItem().equals(unlitTorch))
-				event.setCanceled(true);
 		}
 	}
 
