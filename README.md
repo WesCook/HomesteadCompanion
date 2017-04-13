@@ -6,10 +6,15 @@ An addon mod to bridge compatibility in the Homestead modpack.
 
 ## Features
 
-* Create torches by using sticks on lit campfires ([Tough as Nails](https://github.com/Glitchfiend/ToughAsNails))
+* Craft torches by using sticks on lit campfires ([Tough as Nails](https://github.com/Glitchfiend/ToughAsNails))
+* Craft glass bottles from sand on lit campfires ([Tough as Nails](https://github.com/Glitchfiend/ToughAsNails))
 * Relight torches on the ground ([Realistic Torches](https://github.com/MattCzyr/RealisticTorches)) with a matchbox or lit torch
 
 ## Changelog
+
+[v1.2](https://github.com/WesCook/homestead-companion/releases/tag/v1.2) - 2017-04-12
+
+* Creating generalized list of cookable items at campfire
 
 [v1.1](https://github.com/WesCook/homestead-companion/releases/tag/v1.1) - 2017-03-24
 
