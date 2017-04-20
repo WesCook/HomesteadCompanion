@@ -1,7 +1,5 @@
 package ca.wescook.homesteadcompanion.events;
 
-import ca.wescook.homesteadcompanion.HomesteadCompanion;
-import ca.wescook.homesteadcompanion.gui.ModGuiHandler;
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.IProperty;
@@ -37,11 +35,6 @@ public class EventPlayerInteraction {
 		// If item is used on unlit torch
 		else if (Loader.isModLoaded("RealisticTorches") && blockState.getBlock().equals(Block.getBlockFromName("RealisticTorches:TorchUnlit")))
 			relightTorchOnGround(event, world, player, stack, blockState);
-
-		// NutritionManager GUI
-		// TODO: Implement proper activation method
-		if (blockState.getBlock().equals(Blocks.GRASS) && world.isRemote)
-			player.openGui(HomesteadCompanion.instance, ModGuiHandler.NUTRITION_GUI, world, (int) player.posX, (int) player.posY, (int) player.posZ);
 	}
 
 	private void campfireCraft(PlayerInteractEvent.RightClickBlock event, World world, EntityPlayer player, ItemStack stack, IBlockState blockState) {

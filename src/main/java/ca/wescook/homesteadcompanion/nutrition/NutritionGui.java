@@ -56,7 +56,6 @@ public class NutritionGui extends GuiScreen {
 		this.mc.getTextureManager().bindTexture(nutritionBackground);
 		this.drawTexturedModalRect((width / 2) - (backgroundWidth / 2), (height / 2) - (backgroundHeight / 2), 0, 0, backgroundWidth, backgroundHeight);
 
-
 		// Nutrition bars
 		int i = 0;
 		for (Nutrient nutrient : NutritionManager.returnSet()) {
@@ -101,8 +100,9 @@ public class NutritionGui extends GuiScreen {
 		this.labelList.clear();
 
 		// Draw title
-		this.labelList.add(label = new GuiLabel(fontRendererObj, 0, (width / 2) - (fontRendererObj.getStringWidth(I18n.format("gui" + HomesteadCompanion.MODID + ":nutrition_title")) / 2), (height / 2) + titleVerticalOffset, 200, 100, 0xffffffff));
-		label.addLine(I18n.format("gui." + HomesteadCompanion.MODID + ":nutrition_title"));
+		String nutritionTitle = I18n.format("gui." + HomesteadCompanion.MODID + ":nutrition_title");
+		this.labelList.add(label = new GuiLabel(fontRendererObj, 0, (width / 2) - (fontRendererObj.getStringWidth(nutritionTitle) / 2), (height / 2) + titleVerticalOffset, 200, 100, 0xffffffff));
+		label.addLine(nutritionTitle);
 
 		// Create labels for each nutrient
 		int i = 0;
