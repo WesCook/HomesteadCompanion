@@ -1,0 +1,9 @@
+# GUI
+gui.homesteadcompanion:nutrition_title=Nutrition
+
+# Nutrients
+nutrient.homesteadcompanion:grain=Grain
+nutrient.homesteadcompanion:fruit=Fruit
+nutrient.homesteadcompanion:vegetable=Vegetable
+nutrient.homesteadcompanion:protein=Protein
+nutrient.homesteadcompanion:dairy=Dairy

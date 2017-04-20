@@ -1,5 +1,7 @@
 package ca.wescook.homesteadcompanion.events;
 
+import ca.wescook.homesteadcompanion.HomesteadCompanion;
+import ca.wescook.homesteadcompanion.gui.ModGuiHandler;
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.IProperty;
@@ -35,6 +37,11 @@ public class EventPlayerInteraction {
 		// If item is used on unlit torch
 		else if (Loader.isModLoaded("RealisticTorches") && blockState.getBlock().equals(Block.getBlockFromName("RealisticTorches:TorchUnlit")))
 			relightTorchOnGround(event, world, player, stack, blockState);
+
+		// NutritionManager GUI
+		// TODO: Implement proper activation method
+		if (blockState.getBlock().equals(Blocks.GRASS) && world.isRemote)
+			player.openGui(HomesteadCompanion.instance, ModGuiHandler.NUTRITION_GUI, world, (int) player.posX, (int) player.posY, (int) player.posZ);
 	}
 
 	private void campfireCraft(PlayerInteractEvent.RightClickBlock event, World world, EntityPlayer player, ItemStack stack, IBlockState blockState) {
@@ -55,7 +62,7 @@ public class EventPlayerInteraction {
 			return;
 
 		// If fire is not burning, get out
-		Comparable burningStatus = getProperty(blockState, "burning");
+		Comparable burningStatus = getBlockStateProperty(blockState, "burning");
 		if (burningStatus == null || burningStatus.equals(false))
 			return;
 
@@ -92,7 +99,7 @@ public class EventPlayerInteraction {
 			return;
 
 		// Light torch
-		EnumFacing facing = (EnumFacing)getProperty(blockState, "facing"); // Get torch rotation
+		EnumFacing facing = (EnumFacing) getBlockStateProperty(blockState, "facing"); // Get torch rotation
 		if (facing != null)
 			world.setBlockState(event.getPos(), Block.getBlockFromItem(litTorch).getDefaultState().withProperty(FACING, facing)); // Replace torch with rotation applied
 
@@ -100,13 +107,13 @@ public class EventPlayerInteraction {
 		if (stack.getItem().equals(matchbox))
 			stack.damageItem(1, player);
 
-		// Don't place block
+		// Cancel block place event
 		if (event.isCancelable())
 			event.setCanceled(true);
 	}
 
 	// Iterate through properties looking for string and return value
-	private Comparable getProperty(IBlockState blockState, String desiredProperty) {
+	private Comparable getBlockStateProperty(IBlockState blockState, String desiredProperty) {
 		ImmutableMap<IProperty<?>, Comparable<?>> properties = blockState.getProperties(); // Get list of properties
 		for (Map.Entry<IProperty<?>, Comparable<?>> property : properties.entrySet()) { // Iterate over properties
 			if (property.getKey().getName().equals(desiredProperty)) { // If property is found
