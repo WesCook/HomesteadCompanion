@@ -18,8 +18,9 @@ public class CommonProxy {
 	}
 
 	public void init(FMLInitializationEvent event) {
-		NetworkRegistry.INSTANCE.registerGuiHandler(HomesteadCompanion.instance, new ModGuiHandler()); // Register GUI handler
-		NutritionManager.register(); // Register nutrients
+		// TODO: Commented out while feature is in development
+		//NetworkRegistry.INSTANCE.registerGuiHandler(HomesteadCompanion.instance, new ModGuiHandler()); // Register GUI handler
+		//NutritionManager.register(); // Register nutrients
 	}
 
 	public void postInit(FMLPostInitializationEvent event) {

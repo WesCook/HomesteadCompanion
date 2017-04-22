@@ -21,7 +21,8 @@ public class ClientProxy extends CommonProxy {
 	public void init(FMLInitializationEvent event) {
 		super.init(event);
 
-		ClientRegistry.registerKeyBinding(keyNutritionGui = new KeyBinding("key.nutrition", 49, "Homestead")); // Register key, default to "N"
-		MinecraftForge.EVENT_BUS.register(new EventKeyInput()); // Register key input event
+		// TODO: Commented out while feature is in development
+		//ClientRegistry.registerKeyBinding(keyNutritionGui = new KeyBinding("key.nutrition", 49, "Homestead")); // Register key, default to "N"
+		//MinecraftForge.EVENT_BUS.register(new EventKeyInput()); // Register key input event
 	}
 }

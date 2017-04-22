@@ -12,6 +12,10 @@ An addon mod to bridge compatibility in the Homestead modpack.
 
 ## Changelog
 
+[v1.3](https://github.com/WesCook/homestead-companion/releases/tag/v1.3) - 2017-04-22
+
+* Added item that generates randomized Tinkers Construct tool when given to a player or mob
+
 [v1.2](https://github.com/WesCook/homestead-companion/releases/tag/v1.2) - 2017-04-12
 
 * Creating generalized list of cookable items at campfire
