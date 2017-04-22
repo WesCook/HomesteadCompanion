@@ -1,0 +1,6 @@
+{
+	"parent": "item/generated",
+	"textures": {
+		"layer0": "homesteadcompanion:items/random_tinkers"
+	}
+}

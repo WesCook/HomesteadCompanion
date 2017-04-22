@@ -37,7 +37,18 @@ minecraft {
 	replaceIn 'HomesteadCompanion.java'
 }
 
+repositories {
+	// Tinkers Maven repo
+	maven {
+		name 'DVS1 Maven FS'
+		url 'http://dvs1.progwml6.com/files/maven'
+	}
+}
+
 dependencies {
+	// Tinkers soft dependency
+	deobfCompile "slimeknights.mantle:Mantle:1.10.2-1.1.5.205"
+	deobfCompile "slimeknights:TConstruct:1.10.2-2.6.3.502"
 }
 
 processResources
