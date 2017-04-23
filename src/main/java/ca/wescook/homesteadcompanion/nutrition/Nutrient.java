@@ -9,12 +9,11 @@ public class Nutrient {
 	public ItemStack icon;
 	private int value;
 
-	Nutrient(String name, int color, ItemStack icon, int initialValue) {
+	Nutrient(String name, int color, ItemStack icon) {
 		// Update object
 		this.name = name;
 		this.color = color;
 		this.icon = icon;
-		this.value = initialValue;
 	}
 
 	// Get nutrition value
@@ -24,11 +23,16 @@ public class Nutrient {
 
 	// Increase nutrition
 	public void add(int amount) {
-		this.value += Math.min(amount, 100);
+		value += Math.min(amount, 100);
 	}
 
 	// Decrease nutrition
-	public void decrease(int amount) {
-		this.value -= Math.max(amount, 0);
+	public void subtract(int amount) {
+		value -= Math.max(amount, 0);
+	}
+
+	// Reset nutrient to default value
+	void reset() {
+		value = NutritionManager.STARTING_NUTRITION;
 	}
 }

@@ -12,11 +12,15 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import java.util.HashMap;
 import java.util.Map;
 
-// This code attempts to replace mobs holding a RandomTinkers item with a real tool.  For the player version, see ItemRandomTinkers#onUpdate.
-// To test in game:  /summon Zombie ~3 ~ ~ {HandItems:[{Count:1,id:homesteadcompanion:random_tinkers},{}]}
 public class EventEntitySpawn {
 	@SubscribeEvent
 	public void entitySpawn(EntityJoinWorldEvent event) {
+		checkHoldingRandomTinkers(event);
+	}
+
+	// This code attempts to replace mobs holding a RandomTinkers item with a real tool.  For the player version, see ItemRandomTinkers#onUpdate.
+	// To test in game:  /summon Zombie ~3 ~ ~ {HandItems:[{Count:1,id:homesteadcompanion:random_tinkers},{}]}
+	private void checkHoldingRandomTinkers(EntityJoinWorldEvent event) {
 		// Only run on server
 		if (event.getEntity().getEntityWorld().isRemote)
 			return;

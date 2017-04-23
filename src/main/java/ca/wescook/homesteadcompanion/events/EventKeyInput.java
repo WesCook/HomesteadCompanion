@@ -21,15 +21,18 @@ public class EventKeyInput {
 			return;
 		}
 
-		// If correct key is pressed
 		if (Keyboard.getEventKey() == ClientProxy.keyNutritionGui.getKeyCode()) {
-			// Get data
-			EntityPlayer player = Minecraft.getMinecraft().thePlayer;
-			World world = Minecraft.getMinecraft().theWorld;
-
-			// Open GUI
-			player.openGui(HomesteadCompanion.instance, ModGuiHandler.NUTRITION_GUI, world, (int) player.posX, (int) player.posY, (int) player.posZ);
+			openNutritionGui();
 		}
+	}
 
+	// Opens GUI to show nutrition menu
+	private void openNutritionGui() {
+		// Get data
+		EntityPlayer player = Minecraft.getMinecraft().thePlayer;
+		World world = Minecraft.getMinecraft().theWorld;
+
+		// Open GUI
+		player.openGui(HomesteadCompanion.instance, ModGuiHandler.NUTRITION_GUI, world, (int) player.posX, (int) player.posY, (int) player.posZ);
 	}
 }
