@@ -15,4 +15,4 @@ nutrient.homesteadcompanion:protein=Protein
 nutrient.homesteadcompanion:dairy=Dairy
 
 # Random Tinkers
-tooltip.homesteadcompanion:random_tinkers=This item becomes a random Tinkers Construct weapon
+tooltip.homesteadcompanion:random_tinkers=Transforms into a random Tinkers Construct weapon

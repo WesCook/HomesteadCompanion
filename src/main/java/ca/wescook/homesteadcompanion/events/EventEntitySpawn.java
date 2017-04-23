@@ -1,9 +1,7 @@
 package ca.wescook.homesteadcompanion.events;
 
 import ca.wescook.homesteadcompanion.items.ModItems;
-import com.google.common.collect.Iterables;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
@@ -19,8 +17,12 @@ import java.util.Map;
 public class EventEntitySpawn {
 	@SubscribeEvent
 	public void entitySpawn(EntityJoinWorldEvent event) {
-		// If entity isn't living, get out
-		if (!(event.getEntity() instanceof EntityLivingBase))
+		// Only run on server
+		if (event.getEntity().getEntityWorld().isRemote)
+			return;
+
+		// If entity isn't living (mob), get out
+		if (!(event.getEntity() instanceof EntityLiving))
 			return;
 
 		// Get out if TConstruct isn't installed
@@ -28,7 +30,7 @@ public class EventEntitySpawn {
 			return;
 
 		// Cast to living entity so we get some useful methods
-		EntityLivingBase entity = (EntityLivingBase) event.getEntity();
+		EntityLiving entity = (EntityLiving) event.getEntity();
 
 		// Get contents of each hand
 		Map<EntityEquipmentSlot, ItemStack> equipment = new HashMap<EntityEquipmentSlot, ItemStack>();

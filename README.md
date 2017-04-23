@@ -9,12 +9,13 @@ An addon mod to bridge compatibility in the Homestead modpack.
 * Craft torches by using sticks on lit campfires ([Tough as Nails](https://github.com/Glitchfiend/ToughAsNails))
 * Craft glass bottles from sand on lit campfires ([Tough as Nails](https://github.com/Glitchfiend/ToughAsNails))
 * Relight torches on the ground ([Realistic Torches](https://github.com/MattCzyr/RealisticTorches)) with a matchbox or lit torch
+* An item that generates a random TiC weapon ([Tinkers Construct](https://github.com/SlimeKnights/TinkersConstruct))
 
 ## Changelog
 
 [v1.3](https://github.com/WesCook/homestead-companion/releases/tag/v1.3) - 2017-04-22
 
-* Added item that generates randomized Tinkers Construct tool when given to a player or mob
+* Added item that generates randomized Tinkers Construct weapon when given to a player or mob
 
 [v1.2](https://github.com/WesCook/homestead-companion/releases/tag/v1.2) - 2017-04-12
 

@@ -1,7 +1,6 @@
 package ca.wescook.homesteadcompanion.items;
 
 import ca.wescook.homesteadcompanion.HomesteadCompanion;
-import com.google.common.collect.ImmutableList;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
@@ -17,11 +16,9 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import slimeknights.tconstruct.library.materials.Material;
-import slimeknights.tconstruct.library.tinkering.TinkersItem;
 import slimeknights.tconstruct.library.tools.ToolCore;
 import slimeknights.tconstruct.tools.TinkerMaterials;
 import slimeknights.tconstruct.tools.melee.TinkerMeleeWeapons;
-import slimeknights.tconstruct.tools.melee.item.Cleaver;
 
 import java.util.ArrayList;
 import java.util.List;

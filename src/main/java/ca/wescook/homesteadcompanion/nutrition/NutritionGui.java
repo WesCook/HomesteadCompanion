@@ -63,7 +63,7 @@ public class NutritionGui extends GuiScreen {
 			int nutritionBarDisplayWidth = ((int) ((float) nutrient.getValue() / 100 * nutritionBarWidth));
 
 			// Draw icons
-			this.itemRender.renderItemIntoGUI(nutrient.getIcon(), (width / 2) + nutritionIconHorizontalOffset, (height / 2) + nutritionIconVerticalOffset + (i * nutritionDistance));
+			this.itemRender.renderItemIntoGUI(nutrient.icon, (width / 2) + nutritionIconHorizontalOffset, (height / 2) + nutritionIconVerticalOffset + (i * nutritionDistance));
 
 			// Draw black background
 			drawRect(
@@ -80,7 +80,7 @@ public class NutritionGui extends GuiScreen {
 				(height / 2) + nutritionBarVerticalOffset + (i * nutritionDistance),
 				(width / 2) + nutritionBarHorizontalOffset + nutritionBarDisplayWidth,
 				(height / 2) + nutritionBarVerticalOffset + (i * nutritionDistance) + nutritionBarHeight,
-				nutrient.getColor()
+				nutrient.color
 			);
 
 			i++;
@@ -109,7 +109,7 @@ public class NutritionGui extends GuiScreen {
 		for (Nutrient nutrient : NutritionManager.returnSet()) {
 			// Nutrition name
 			this.labelList.add(label = new GuiLabel(fontRendererObj, 0, (width / 2) + labelNameHorizontalOffset, (height / 2) + labelVerticalOffset + (i * nutritionDistance), 200, 100, 0xffffffff));
-			label.addLine(I18n.format("nutrient." + HomesteadCompanion.MODID + ":" + nutrient.getName())); // Add name from localization file
+			label.addLine(I18n.format("nutrient." + HomesteadCompanion.MODID + ":" + nutrient.name)); // Add name from localization file
 
 			// Nutrition value
 			this.labelList.add(label = new GuiLabel(fontRendererObj, 0, (width / 2) + labelValueHorizontalOffset, (height / 2) + labelVerticalOffset + (i * nutritionDistance), 200, 100, 0xffffffff));

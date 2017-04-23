@@ -4,10 +4,10 @@ import net.minecraft.item.ItemStack;
 
 public class Nutrient {
 	// Nutrient properties
-	private String name;
-	private int color;
+	public String name;
+	public int color;
+	public ItemStack icon;
 	private int value;
-	private ItemStack icon;
 
 	Nutrient(String name, int color, ItemStack icon, int initialValue) {
 		// Update object
@@ -17,28 +17,18 @@ public class Nutrient {
 		this.value = initialValue;
 	}
 
-	// Get name
-	String getName() {
-		return name;
-	}
-
-	// Get background color
-	int getColor() {
-		return color;
-	}
-
-	// Get icon
-	ItemStack getIcon() {
-		return icon;
-	}
-
 	// Get nutrition value
-	int getValue() {
+	public int getValue() {
 		return value;
 	}
 
-	// Set nutrition value
-	public void setValue(int value) {
-		this.value = value;
+	// Increase nutrition
+	public void add(int amount) {
+		this.value += Math.min(amount, 100);
+	}
+
+	// Decrease nutrition
+	public void decrease(int amount) {
+		this.value -= Math.max(amount, 0);
 	}
 }
