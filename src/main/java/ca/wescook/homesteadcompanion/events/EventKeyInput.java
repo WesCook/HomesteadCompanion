@@ -27,6 +27,7 @@ public class EventKeyInput {
 	}
 
 	// Opens GUI to show nutrition menu
+	@SideOnly(Side.CLIENT)
 	private void openNutritionGui() {
 		// Get data
 		EntityPlayer player = Minecraft.getMinecraft().thePlayer;

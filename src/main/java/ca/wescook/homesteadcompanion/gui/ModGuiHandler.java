@@ -1,6 +1,5 @@
 package ca.wescook.homesteadcompanion.gui;
 
-import ca.wescook.homesteadcompanion.nutrition.NutritionGui;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;

@@ -1,12 +1,16 @@
-package ca.wescook.homesteadcompanion.nutrition;
+package ca.wescook.homesteadcompanion.gui;
 
 import ca.wescook.homesteadcompanion.HomesteadCompanion;
+import ca.wescook.homesteadcompanion.nutrition.common.Nutrient;
+import ca.wescook.homesteadcompanion.nutrition.common.NutrientList;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiLabel;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.io.IOException;
 
@@ -58,9 +62,9 @@ public class NutritionGui extends GuiScreen {
 
 		// Nutrition bars
 		int i = 0;
-		for (Nutrient nutrient : NutritionManager.returnSet()) {
+		for (Nutrient nutrient : NutrientList.returnSet()) {
 			// Calculate percentage width for nutrition bars
-			int nutritionBarDisplayWidth = ((int) ((float) nutrient.getValue() / 100 * nutritionBarWidth));
+			int nutritionBarDisplayWidth = ((int) ((float) /* TODO: nutrient.getValue()*/ 20 / 100 * nutritionBarWidth));
 
 			// Draw icons
 			this.itemRender.renderItemIntoGUI(nutrient.icon, (width / 2) + nutritionIconHorizontalOffset, (height / 2) + nutritionIconVerticalOffset + (i * nutritionDistance));
@@ -106,14 +110,14 @@ public class NutritionGui extends GuiScreen {
 
 		// Create labels for each nutrient
 		int i = 0;
-		for (Nutrient nutrient : NutritionManager.returnSet()) {
+		for (Nutrient nutrient : NutrientList.returnSet()) {
 			// Nutrition name
 			this.labelList.add(label = new GuiLabel(fontRendererObj, 0, (width / 2) + labelNameHorizontalOffset, (height / 2) + labelVerticalOffset + (i * nutritionDistance), 200, 100, 0xffffffff));
 			label.addLine(I18n.format("nutrient." + HomesteadCompanion.MODID + ":" + nutrient.name)); // Add name from localization file
 
 			// Nutrition value
 			this.labelList.add(label = new GuiLabel(fontRendererObj, 0, (width / 2) + labelValueHorizontalOffset, (height / 2) + labelVerticalOffset + (i * nutritionDistance), 200, 100, 0xffffffff));
-			label.addLine(nutrient.getValue() + "%%");
+			label.addLine(/* TODO: nutrient.getValue()*/ 20 + "%%");
 
 			i++;
 		}

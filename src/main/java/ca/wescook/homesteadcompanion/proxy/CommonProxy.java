@@ -1,13 +1,10 @@
 package ca.wescook.homesteadcompanion.proxy;
 
 import ca.wescook.homesteadcompanion.HomesteadCompanion;
-import ca.wescook.homesteadcompanion.events.EventEntitySpawn;
-import ca.wescook.homesteadcompanion.events.EventPlayerInteraction;
-import ca.wescook.homesteadcompanion.events.EventPlayerLogin;
-import ca.wescook.homesteadcompanion.events.EventUseItem;
+import ca.wescook.homesteadcompanion.events.*;
 import ca.wescook.homesteadcompanion.gui.ModGuiHandler;
 import ca.wescook.homesteadcompanion.items.ModItems;
-import ca.wescook.homesteadcompanion.nutrition.NutritionManager;
+import ca.wescook.homesteadcompanion.nutrition.common.NutrientList;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -20,12 +17,16 @@ public class CommonProxy {
 	}
 
 	public void init(FMLInitializationEvent event) {
-		NetworkRegistry.INSTANCE.registerGuiHandler(HomesteadCompanion.instance, new ModGuiHandler()); // Register GUI handler
-		NutritionManager.register(); // Register nutrients
+		// Register GUI handler
+		NetworkRegistry.INSTANCE.registerGuiHandler(HomesteadCompanion.instance, new ModGuiHandler());
+
+		// Register nutrients
+		NutrientList.register();
 	}
 
 	public void postInit(FMLPostInitializationEvent event) {
-		MinecraftForge.EVENT_BUS.register(new EventPlayerLogin()); // Register use item event
+		MinecraftForge.EVENT_BUS.register(new EventPlayerLogIn()); // Register player login
+		MinecraftForge.EVENT_BUS.register(new EventPlayerLogOut()); // Register player logout
 		MinecraftForge.EVENT_BUS.register(new EventPlayerInteraction()); // Register interaction event
 		MinecraftForge.EVENT_BUS.register(new EventEntitySpawn()); // Register entity spawn event
 		MinecraftForge.EVENT_BUS.register(new EventUseItem()); // Register use item event
