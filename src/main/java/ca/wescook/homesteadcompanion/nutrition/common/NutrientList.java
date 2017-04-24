@@ -24,7 +24,7 @@ public class NutrientList {
 	}
 
 	// Return list of all nutrients
-	public static List<Nutrient> returnSet() {
+	public static List<Nutrient> getAll() {
 		return nutrients;
 	}
 

@@ -13,14 +13,12 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
 
 import java.io.IOException;
+import java.util.Map;
 
 public class NutritionGui extends GuiScreen {
 	private GuiButton buttonClose;
 	private GuiLabel label;
-
-	// Initial display value
-	// Later updated from network request
-	private int NETWORK_TEST = 0;
+	private Map<Nutrient, Integer> nutrientData;
 
 	// Magic numbers
 	private int nutritionDistance = 20; // Vertical distance between each entry
@@ -65,9 +63,10 @@ public class NutritionGui extends GuiScreen {
 
 		// Nutrition bars
 		int i = 0;
-		for (Nutrient nutrient : NutrientList.returnSet()) {
+		for (Nutrient nutrient : NutrientList.getAll()) {
 			// Calculate percentage width for nutrition bars
-			int nutritionBarDisplayWidth = ((int) ((float) NETWORK_TEST / 100 * nutritionBarWidth));
+			int currentNutrient = (nutrientData != null && nutrientData.get(nutrient) != null) ? nutrientData.get(nutrient) : 0; // If null, set to 0, else get true value
+			int nutritionBarDisplayWidth = ((int) ((float) currentNutrient / 100 * nutritionBarWidth));
 
 			// Draw icons
 			this.itemRender.renderItemIntoGUI(nutrient.icon, (width / 2) + nutritionIconHorizontalOffset, (height / 2) + nutritionIconVerticalOffset + (i * nutritionDistance));
@@ -116,7 +115,7 @@ public class NutritionGui extends GuiScreen {
 
 		// Create labels for each nutrient type
 		int i = 0;
-		for (Nutrient nutrient : NutrientList.returnSet()) {
+		for (Nutrient nutrient : NutrientList.getAll()) {
 			this.labelList.add(label = new GuiLabel(fontRendererObj, 0, (width / 2) + labelNameHorizontalOffset, (height / 2) + labelVerticalOffset + (i * nutritionDistance), 200, 100, 0xffffffff));
 			label.addLine(I18n.format("nutrient." + HomesteadCompanion.MODID + ":" + nutrient.name)); // Add name from localization file
 			i++;
@@ -134,16 +133,16 @@ public class NutritionGui extends GuiScreen {
 	}
 
 	// Called when network request is completed to update GUI data
-	public void updateInformation(int val) {
+	public void updateInformation(Map<Nutrient, Integer> nutrientData) {
 		// Update nutrition info
-		NETWORK_TEST = val;
+		this.nutrientData = nutrientData;
 
 		// Create percent value labels for each nutrient
 		// Can't be updated after drawing, so needs to happen after information is received
 		int i = 0;
-		for (Nutrient nutrient : NutrientList.returnSet()) {
+		for (Nutrient nutrient : NutrientList.getAll()) {
 			this.labelList.add(label = new GuiLabel(fontRendererObj, 0, (width / 2) + labelValueHorizontalOffset, (height / 2) + labelVerticalOffset + (i * nutritionDistance), 200, 100, 0xffffffff));
-			label.addLine(NETWORK_TEST + "%%");
+			label.addLine(nutrientData.get(nutrient) + "%%");
 			i++;
 		}
 	}

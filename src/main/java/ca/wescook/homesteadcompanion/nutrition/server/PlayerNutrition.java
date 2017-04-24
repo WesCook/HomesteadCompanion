@@ -12,6 +12,17 @@ public class PlayerNutrition {
 	// Maps Nutrient type to value for that nutrient
 	private Map<Nutrient, Integer> nutrientData = new HashMap<Nutrient, Integer>();
 
+	// Return all nutrients
+	public Map<Nutrient, Integer> get() {
+		return nutrientData;
+	}
+
+	// Return specific nutrient
+	public Integer get(Nutrient nutrient) {
+		return nutrientData.get(nutrient);
+	}
+
+
 	// Increase nutrition
 	public void add(Nutrient nutrient, int amount) {
 		int currentAmount = nutrientData.get(nutrient);
@@ -27,7 +38,7 @@ public class PlayerNutrition {
 	// Reset nutrient to default value
 	// Probably a new player
 	void reset() {
-		for (Nutrient nutrient : NutrientList.returnSet()) // Loop through known nutrient list
+		for (Nutrient nutrient : NutrientList.getAll()) // Loop through known nutrient list
 			nutrientData.put(nutrient, NutrientList.STARTING_NUTRITION); // Reset values (if they exist, overwritten - if not, created)
 	}
 

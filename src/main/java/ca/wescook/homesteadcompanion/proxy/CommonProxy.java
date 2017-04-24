@@ -32,7 +32,7 @@ public class CommonProxy {
 	public void postInit(FMLPostInitializationEvent event) {
 		MinecraftForge.EVENT_BUS.register(new EventPlayerLogIn()); // Register player login
 		MinecraftForge.EVENT_BUS.register(new EventPlayerLogOut()); // Register player logout
-		MinecraftForge.EVENT_BUS.register(new EventPlayerInteraction()); // Register interaction event
+		MinecraftForge.EVENT_BUS.register(new EventPlayerInteraction()); // Register player interaction event
 		MinecraftForge.EVENT_BUS.register(new EventEntitySpawn()); // Register entity spawn event
 		MinecraftForge.EVENT_BUS.register(new EventUseItem()); // Register use item event
 	}

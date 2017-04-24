@@ -7,7 +7,7 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 public class EventPlayerLogOut {
 	@SubscribeEvent
 	public void playerLogOut(PlayerEvent.PlayerLoggedOutEvent event) {
-		// Release player from nutrition list
+		// Release player from nutrition list (on server)
 		if (!event.player.worldObj.isRemote)
 			PlayerNutritionList.releasePlayer(event.player);
 	}

@@ -7,7 +7,7 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 public class EventPlayerLogIn {
 	@SubscribeEvent
 	public void playerLogIn(PlayerEvent.PlayerLoggedInEvent event) {
-		// Start tracking new player's nutrition
+		// Start tracking new player's nutrition (on server)
 		if (!event.player.worldObj.isRemote)
 			PlayerNutritionList.newPlayer(event.player);
 	}

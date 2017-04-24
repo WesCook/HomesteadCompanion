@@ -1,16 +1,11 @@
 package ca.wescook.homesteadcompanion.network;
 
-import com.google.common.util.concurrent.ListenableFuture;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.text.TextFormatting;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
-
-import java.util.Random;
 
 public class PacketNutritionRequest {
 	// Message Subclass
@@ -19,10 +14,10 @@ public class PacketNutritionRequest {
 		public Message() {}
 
 		@Override
-		public void fromBytes(ByteBuf buf) {}
+		public void toBytes(ByteBuf buf) {}
 
 		@Override
-		public void toBytes(ByteBuf buf) {}
+		public void fromBytes(ByteBuf buf) {}
 	}
 
 	// Message Handler Subclass
@@ -34,9 +29,8 @@ public class PacketNutritionRequest {
 				@Override
 				public void run() {
 					// Return message
-					int val = new Random().nextInt(100) + 1; // Create data
-					// EntityPlayerMP playerEntity = context.getServerHandler().playerEntity; // Get Player on server
-					ModPacketHandler.NETWORK_CHANNEL.sendTo(new PacketNutritionResponse.Message(val), context.getServerHandler().playerEntity);
+					EntityPlayer player = context.getServerHandler().playerEntity; // Get Player on server
+					ModPacketHandler.NETWORK_CHANNEL.sendTo(new PacketNutritionResponse.Message(player), context.getServerHandler().playerEntity);
 				}
 			});
 			return null;
