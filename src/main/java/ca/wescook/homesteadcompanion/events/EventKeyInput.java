@@ -34,6 +34,6 @@ public class EventKeyInput {
 		World world = Minecraft.getMinecraft().theWorld;
 
 		// Open GUI
-		player.openGui(HomesteadCompanion.instance, ModGuiHandler.NUTRITION_GUI, world, (int) player.posX, (int) player.posY, (int) player.posZ);
+		player.openGui(HomesteadCompanion.instance, ModGuiHandler.NUTRITION_GUI_ID, world, (int) player.posX, (int) player.posY, (int) player.posZ);
 	}
 }

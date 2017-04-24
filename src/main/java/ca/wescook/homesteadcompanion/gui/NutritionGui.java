@@ -1,6 +1,8 @@
 package ca.wescook.homesteadcompanion.gui;
 
 import ca.wescook.homesteadcompanion.HomesteadCompanion;
+import ca.wescook.homesteadcompanion.network.ModPacketHandler;
+import ca.wescook.homesteadcompanion.network.PacketNutritionRequest;
 import ca.wescook.homesteadcompanion.nutrition.common.Nutrient;
 import ca.wescook.homesteadcompanion.nutrition.common.NutrientList;
 import net.minecraft.client.gui.GuiButton;
@@ -9,15 +11,16 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.io.IOException;
 
 public class NutritionGui extends GuiScreen {
-	// Fields
 	private GuiButton buttonClose;
 	private GuiLabel label;
+
+	// Initial display value
+	// Later updated from network request
+	private int NETWORK_TEST = 0;
 
 	// Magic numbers
 	private int nutritionDistance = 20; // Vertical distance between each entry
@@ -64,7 +67,7 @@ public class NutritionGui extends GuiScreen {
 		int i = 0;
 		for (Nutrient nutrient : NutrientList.returnSet()) {
 			// Calculate percentage width for nutrition bars
-			int nutritionBarDisplayWidth = ((int) ((float) /* TODO: nutrient.getValue()*/ 20 / 100 * nutritionBarWidth));
+			int nutritionBarDisplayWidth = ((int) ((float) NETWORK_TEST / 100 * nutritionBarWidth));
 
 			// Draw icons
 			this.itemRender.renderItemIntoGUI(nutrient.icon, (width / 2) + nutritionIconHorizontalOffset, (height / 2) + nutritionIconVerticalOffset + (i * nutritionDistance));
@@ -97,6 +100,9 @@ public class NutritionGui extends GuiScreen {
 	// Called when GUI is opened or resized
 	@Override
 	public void initGui() {
+		// Request nutrition data
+		ModPacketHandler.NETWORK_CHANNEL.sendToServer(new PacketNutritionRequest.Message()); // Make request
+
 		// Add buttons
 		this.buttonList.add(this.buttonClose = new GuiButton(0, (width / 2) - (closeButtonWidth / 2), (height / 2) + closeButtonVerticalOffset, closeButtonWidth, closeButtonHeight, "Close"));
 
@@ -108,17 +114,11 @@ public class NutritionGui extends GuiScreen {
 		this.labelList.add(label = new GuiLabel(fontRendererObj, 0, (width / 2) - (fontRendererObj.getStringWidth(nutritionTitle) / 2), (height / 2) + titleVerticalOffset, 200, 100, 0xffffffff));
 		label.addLine(nutritionTitle);
 
-		// Create labels for each nutrient
+		// Create labels for each nutrient type
 		int i = 0;
 		for (Nutrient nutrient : NutrientList.returnSet()) {
-			// Nutrition name
 			this.labelList.add(label = new GuiLabel(fontRendererObj, 0, (width / 2) + labelNameHorizontalOffset, (height / 2) + labelVerticalOffset + (i * nutritionDistance), 200, 100, 0xffffffff));
 			label.addLine(I18n.format("nutrient." + HomesteadCompanion.MODID + ":" + nutrient.name)); // Add name from localization file
-
-			// Nutrition value
-			this.labelList.add(label = new GuiLabel(fontRendererObj, 0, (width / 2) + labelValueHorizontalOffset, (height / 2) + labelVerticalOffset + (i * nutritionDistance), 200, 100, 0xffffffff));
-			label.addLine(/* TODO: nutrient.getValue()*/ 20 + "%%");
-
 			i++;
 		}
 	}
@@ -130,6 +130,21 @@ public class NutritionGui extends GuiScreen {
 			this.mc.displayGuiScreen(null); // Close GUI
 			if (this.mc.currentScreen == null)
 				this.mc.setIngameFocus(); // Focus game
+		}
+	}
+
+	// Called when network request is completed to update GUI data
+	public void updateInformation(int val) {
+		// Update nutrition info
+		NETWORK_TEST = val;
+
+		// Create percent value labels for each nutrient
+		// Can't be updated after drawing, so needs to happen after information is received
+		int i = 0;
+		for (Nutrient nutrient : NutrientList.returnSet()) {
+			this.labelList.add(label = new GuiLabel(fontRendererObj, 0, (width / 2) + labelValueHorizontalOffset, (height / 2) + labelVerticalOffset + (i * nutritionDistance), 200, 100, 0xffffffff));
+			label.addLine(NETWORK_TEST + "%%");
+			i++;
 		}
 	}
 }

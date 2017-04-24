@@ -1,14 +1,13 @@
 package ca.wescook.homesteadcompanion.nutrition.common;
 
-import ca.wescook.homesteadcompanion.nutrition.common.Nutrient;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
 
-// Visual information about nutrients (name, color, icon)
-// Stored client and server-side, static
+// Maintains list of information about nutrients (name, color, icon)
+// Stored client and server-side
 public class NutrientList {
 	private static List<Nutrient> nutrients = new ArrayList<Nutrient>();
 

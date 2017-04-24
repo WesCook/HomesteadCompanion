@@ -5,6 +5,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import java.util.HashMap;
 import java.util.Map;
 
+// Maintains list of current player's nutrients being tracked (as instances of PlayerNutrition)
+// Saves/loads as players join/leave, so only logged in users are tracked
+// Stored server-side
 public class PlayerNutritionList {
 	private static Map<EntityPlayer, PlayerNutrition> playerNutritionData = new HashMap<EntityPlayer, PlayerNutrition>();
 
