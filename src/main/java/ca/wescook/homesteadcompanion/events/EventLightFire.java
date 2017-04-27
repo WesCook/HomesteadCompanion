@@ -20,7 +20,7 @@ import java.util.Map;
 
 import static net.minecraft.block.BlockTorch.FACING;
 
-public class EventPlayerInteraction {
+public class EventLightFire {
 	@SubscribeEvent
 	public void playerInteraction(PlayerInteractEvent.RightClickBlock event) {
 		// Get info

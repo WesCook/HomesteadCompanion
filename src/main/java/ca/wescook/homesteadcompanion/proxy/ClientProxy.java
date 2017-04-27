@@ -1,6 +1,6 @@
 package ca.wescook.homesteadcompanion.proxy;
 
-import ca.wescook.homesteadcompanion.events.EventKeyInput;
+import ca.wescook.homesteadcompanion.events.EventNutritionKey;
 import ca.wescook.homesteadcompanion.items.ModItems;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraftforge.common.MinecraftForge;
@@ -22,6 +22,6 @@ public class ClientProxy extends CommonProxy {
 		super.init(event);
 
 		ClientRegistry.registerKeyBinding(keyNutritionGui = new KeyBinding("key.nutrition", 49, "Homestead")); // Register Nutrition keybind, default to "N"
-		MinecraftForge.EVENT_BUS.register(new EventKeyInput()); // Register key input event to respond to keybind
+		MinecraftForge.EVENT_BUS.register(new EventNutritionKey()); // Register key input event to respond to keybind
 	}
 }

@@ -16,7 +16,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class EventGuiScreen {
+public class EventNutritionButton {
 	private GuiButton buttonNutrition;
 	private int NUTRITION_ID = 800;
 
@@ -37,6 +37,10 @@ public class EventGuiScreen {
 	@SubscribeEvent
 	@SideOnly(Side.CLIENT)
 	public void guiButtonClick(GuiScreenEvent.ActionPerformedEvent.Post event) {
+		// Only continue if nutrition button is pressed
+		if (!event.getButton().equals(buttonNutrition))
+			return;
+
 		// Get data
 		EntityPlayer player = Minecraft.getMinecraft().thePlayer;
 		World world = Minecraft.getMinecraft().theWorld;

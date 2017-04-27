@@ -12,7 +12,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.input.Keyboard;
 
-public class EventKeyInput {
+public class EventNutritionKey {
 	@SubscribeEvent
 	@SideOnly(Side.CLIENT)
 	public void keyInput(InputEvent.KeyInputEvent event) {

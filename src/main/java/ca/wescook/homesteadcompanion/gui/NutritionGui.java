@@ -5,11 +5,13 @@ import ca.wescook.homesteadcompanion.network.ModPacketHandler;
 import ca.wescook.homesteadcompanion.network.PacketNutritionRequest;
 import ca.wescook.homesteadcompanion.nutrition.common.Nutrient;
 import ca.wescook.homesteadcompanion.nutrition.common.NutrientList;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiLabel;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.util.ResourceLocation;
 
 import java.io.IOException;
@@ -145,5 +147,27 @@ public class NutritionGui extends GuiScreen {
 			label.addLine(nutrientData.get(nutrient) + "%%");
 			i++;
 		}
+	}
+
+	// Close GUI if inventory key is hit again
+	@Override
+	protected void keyTyped(char typedChar, int keyCode) throws IOException {
+		super.keyTyped(typedChar, keyCode);
+
+		// If "E" (open GUI) key is pressed
+		if (keyCode == Minecraft.getMinecraft().gameSettings.keyBindInventory.getKeyCode()) {
+			// Close GUI
+			this.mc.displayGuiScreen(null);
+
+			// Set focus
+			if (this.mc.currentScreen == null)
+				this.mc.setIngameFocus();
+		}
+	}
+
+	// Opening Nutrition menu doesn't pause game
+	@Override
+	public boolean doesGuiPauseGame() {
+		return false;
 	}
 }

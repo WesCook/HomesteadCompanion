@@ -11,7 +11,7 @@ import net.minecraft.item.ItemFood;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-public class EventUseItem {
+public class EventEatFood {
 	@SubscribeEvent
 	public void finishUsingItem(LivingEntityUseItemEvent.Finish event) {
 		checkFoodEaten(event);

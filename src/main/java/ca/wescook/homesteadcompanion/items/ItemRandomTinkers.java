@@ -40,7 +40,7 @@ public class ItemRandomTinkers extends Item {
 	}
 
 	// When in inventory, try and turn into Tinkers tool
-	// This only applies to players.  See EventEntitySpawn for the mob version of this code.
+	// This only applies to players.  See EventRandomTinkers for the mob version of this code.
 	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
 		// Get out if TConstruct isn't installed
 		if (!Loader.isModLoaded("tconstruct"))

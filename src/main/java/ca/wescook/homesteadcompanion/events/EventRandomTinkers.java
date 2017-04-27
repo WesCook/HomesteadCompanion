@@ -12,7 +12,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import java.util.HashMap;
 import java.util.Map;
 
-public class EventEntitySpawn {
+public class EventRandomTinkers {
 	@SubscribeEvent
 	public void entitySpawn(EntityJoinWorldEvent event) {
 		checkHoldingRandomTinkers(event);

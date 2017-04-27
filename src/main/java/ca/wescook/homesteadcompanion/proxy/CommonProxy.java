@@ -21,15 +21,13 @@ public class CommonProxy {
 	public void init(FMLInitializationEvent event) {
 		NetworkRegistry.INSTANCE.registerGuiHandler(HomesteadCompanion.instance, new ModGuiHandler()); // Register GUI handler
 		NutrientList.register(); // Register nutrients
-		MinecraftForge.EVENT_BUS.register(new EventPlayerInteraction()); // Register player interaction event
+		MinecraftForge.EVENT_BUS.register(new EventLightFire()); // Register player interaction event
 	}
 
 	public void postInit(FMLPostInitializationEvent event) {
-		MinecraftForge.EVENT_BUS.register(new EventPlayerLogIn()); // Register player login event
-		MinecraftForge.EVENT_BUS.register(new EventPlayerLogOut()); // Register player logout event
-		MinecraftForge.EVENT_BUS.register(new EventPlayerDeath()); // Register player death event
-		MinecraftForge.EVENT_BUS.register(new EventGuiScreen()); // Register GUI events
-		MinecraftForge.EVENT_BUS.register(new EventEntitySpawn()); // Register entity spawn event
-		MinecraftForge.EVENT_BUS.register(new EventUseItem()); // Register use item event
+		MinecraftForge.EVENT_BUS.register(new EventPlayerAction()); // Player player login, logout, death
+		MinecraftForge.EVENT_BUS.register(new EventNutritionButton()); // Register GUI events
+		MinecraftForge.EVENT_BUS.register(new EventRandomTinkers()); // Register entity spawn event
+		MinecraftForge.EVENT_BUS.register(new EventEatFood()); // Register use item event
 	}
 }
