@@ -30,7 +30,7 @@ public class EventUseItem {
 
 		// Add nutrition value
 		ItemFood food = (ItemFood) event.getItem().getItem();
-		if (food.equals(Items.BEETROOT)) {
+		if (food.equals(Items.BEETROOT)) { // TODO: Dynamic categories - only test item
 			PlayerNutrition playerNutrition = PlayerNutritionList.getPlayerNutrition((EntityPlayer) event.getEntity()); // Get player's nutrition
 			Nutrient vegetable = NutrientList.getNutrientByName("vegetable"); // Get relevant nutrient
 			playerNutrition.add(vegetable, food.getHealAmount(null)); // Update player nutrition

@@ -15,17 +15,13 @@ public class ClientProxy extends CommonProxy {
 	public void preInit(FMLPreInitializationEvent event) {
 		super.preInit(event);
 
-		// Client-side rendering
-		ModItems.renderItems();
+		ModItems.renderItems(); // Client-side rendering
 	}
 
 	public void init(FMLInitializationEvent event) {
 		super.init(event);
 
-		// Register Nutrition keybind, default to "N"
-		ClientRegistry.registerKeyBinding(keyNutritionGui = new KeyBinding("key.nutrition", 49, "Homestead"));
-
-		// Register key input event to respond to keybind
-		MinecraftForge.EVENT_BUS.register(new EventKeyInput());
+		ClientRegistry.registerKeyBinding(keyNutritionGui = new KeyBinding("key.nutrition", 49, "Homestead")); // Register Nutrition keybind, default to "N"
+		MinecraftForge.EVENT_BUS.register(new EventKeyInput()); // Register key input event to respond to keybind
 	}
 }
