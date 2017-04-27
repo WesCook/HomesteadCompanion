@@ -35,7 +35,7 @@ public class PlayerNutrition {
 		nutrientData.put(nutrient, Math.max(currentAmount - amount, 0));
 	}
 
-	// Reset nutrient to default value
+	// Reset nutrition to default value
 	// Probably a new player
 	void reset() {
 		for (Nutrient nutrient : NutrientList.getAll()) // Loop through known nutrient list

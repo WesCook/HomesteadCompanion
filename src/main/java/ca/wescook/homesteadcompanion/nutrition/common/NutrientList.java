@@ -12,7 +12,7 @@ public class NutrientList {
 	private static List<Nutrient> nutrients = new ArrayList<Nutrient>();
 
 	public static final int STARTING_NUTRITION = 50;
-	public static final int DEATH_LOSS = 25;
+	public static final int DEATH_LOSS = 15;
 
 	public static void register() {
 		// Register nutrients
