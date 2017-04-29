@@ -1,5 +1,7 @@
 package ca.wescook.homesteadcompanion.events;
 
+import ca.wescook.homesteadcompanion.capabilities.IMana;
+import ca.wescook.homesteadcompanion.capabilities.ManaProvider;
 import ca.wescook.homesteadcompanion.nutrition.common.Nutrient;
 import ca.wescook.homesteadcompanion.nutrition.common.NutrientList;
 import ca.wescook.homesteadcompanion.nutrition.server.PlayerNutrition;
@@ -35,5 +37,9 @@ public class EventEatFood {
 			Nutrient vegetable = NutrientList.getNutrientByName("vegetable"); // Get relevant nutrient
 			playerNutrition.add(vegetable, food.getHealAmount(null)); // Update player nutrition
 		}
+
+		// Add mana
+		IMana mana = event.getEntity().getCapability(ManaProvider.MANA_CAP, null);
+		mana.fill(15);
 	}
 }

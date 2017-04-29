@@ -2,7 +2,7 @@
 item.homesteadcompanion:random_tinkers.name=Random Tinkers Tool
 
 # Keys
-key.nutrition=Open nutrition GUI
+key.nutrition=Open Nutrition GUI
 
 # GUI
 gui.homesteadcompanion:nutrition_title=Nutrition
