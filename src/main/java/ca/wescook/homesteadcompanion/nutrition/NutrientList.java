@@ -1,4 +1,4 @@
-package ca.wescook.homesteadcompanion.nutrition.common;
+package ca.wescook.homesteadcompanion.nutrition;
 
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -11,11 +11,8 @@ import java.util.List;
 public class NutrientList {
 	private static List<Nutrient> nutrients = new ArrayList<Nutrient>();
 
-	public static final int STARTING_NUTRITION = 50;
-	public static final int DEATH_LOSS = 15;
-
+	// Register nutrients
 	public static void register() {
-		// Register nutrients
 		nutrients.add(new Nutrient("grain", 0xfff4d92e, new ItemStack(Items.WHEAT)));
 		nutrients.add(new Nutrient("fruit", 0xffcd73f4, new ItemStack(Items.APPLE)));
 		nutrients.add(new Nutrient("vegetable", 0xff72dd5a, new ItemStack(Items.CARROT)));
@@ -24,18 +21,16 @@ public class NutrientList {
 	}
 
 	// Return list of all nutrients
-	public static List<Nutrient> getAll() {
+	public static List<Nutrient> get() {
 		return nutrients;
 	}
 
-	// Return nutrient by name
-	// Returns null if not found
+	// Return nutrient by name (null if not found)
 	public static Nutrient getNutrientByName(String name) {
 		for (Nutrient nutrient : nutrients) {
 			if (nutrient.name.equals(name))
 				return nutrient;
 		}
-
 		return null;
 	}
 }

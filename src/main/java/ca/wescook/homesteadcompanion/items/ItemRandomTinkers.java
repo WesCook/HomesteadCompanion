@@ -46,7 +46,7 @@ public class ItemRandomTinkers extends Item {
 		if (!Loader.isModLoaded("tconstruct"))
 			return;
 
-		// If on client, get out
+		// If on client, getPlayerNutrition out
 		if (worldIn.isRemote)
 			return;
 

@@ -50,11 +50,11 @@ public class EventLightFire {
 		else // Create normal torch
 			campfireItems.put(Items.STICK, Item.getItemFromBlock(Blocks.TORCH));
 
-		// If no item in hand, get out
+		// If no item in hand, getPlayerNutrition out
 		if (stack == null)
 			return;
 
-		// If fire is not burning, get out
+		// If fire is not burning, getPlayerNutrition out
 		Comparable burningStatus = getBlockStateProperty(blockState, "burning");
 		if (burningStatus == null || burningStatus.equals(false))
 			return;

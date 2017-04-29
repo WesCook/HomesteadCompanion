@@ -3,15 +3,14 @@ package ca.wescook.homesteadcompanion.gui;
 import ca.wescook.homesteadcompanion.HomesteadCompanion;
 import ca.wescook.homesteadcompanion.network.ModPacketHandler;
 import ca.wescook.homesteadcompanion.network.PacketNutritionRequest;
-import ca.wescook.homesteadcompanion.nutrition.common.Nutrient;
-import ca.wescook.homesteadcompanion.nutrition.common.NutrientList;
+import ca.wescook.homesteadcompanion.nutrition.Nutrient;
+import ca.wescook.homesteadcompanion.nutrition.NutrientList;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiLabel;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.util.ResourceLocation;
 
 import java.io.IOException;
@@ -65,9 +64,9 @@ public class NutritionGui extends GuiScreen {
 
 		// Nutrition bars
 		int i = 0;
-		for (Nutrient nutrient : NutrientList.getAll()) {
+		for (Nutrient nutrient : NutrientList.get()) {
 			// Calculate percentage width for nutrition bars
-			int currentNutrient = (nutrientData != null && nutrientData.get(nutrient) != null) ? nutrientData.get(nutrient) : 0; // If null, set to 0, else get true value
+			int currentNutrient = (nutrientData != null && nutrientData.get(nutrient) != null) ? nutrientData.get(nutrient) : 0; // If null, setPlayerNutrition to 0, else getPlayerNutrition true value
 			int nutritionBarDisplayWidth = ((int) ((float) currentNutrient / 100 * nutritionBarWidth));
 
 			// Draw icons
@@ -117,7 +116,7 @@ public class NutritionGui extends GuiScreen {
 
 		// Create labels for each nutrient type
 		int i = 0;
-		for (Nutrient nutrient : NutrientList.getAll()) {
+		for (Nutrient nutrient : NutrientList.get()) {
 			this.labelList.add(label = new GuiLabel(fontRendererObj, 0, (width / 2) + labelNameHorizontalOffset, (height / 2) + labelVerticalOffset + (i * nutritionDistance), 200, 100, 0xffffffff));
 			label.addLine(I18n.format("nutrient." + HomesteadCompanion.MODID + ":" + nutrient.name)); // Add name from localization file
 			i++;
@@ -134,7 +133,7 @@ public class NutritionGui extends GuiScreen {
 		}
 	}
 
-	// Called when network request is completed to update GUI data
+	// Called when network request is completed to setPlayerNutrition GUI data
 	public void updateInformation(Map<Nutrient, Integer> nutrientData) {
 		// Update nutrition info
 		this.nutrientData = nutrientData;
@@ -142,7 +141,7 @@ public class NutritionGui extends GuiScreen {
 		// Create percent value labels for each nutrient
 		// Can't be updated after drawing, so needs to happen after information is received
 		int i = 0;
-		for (Nutrient nutrient : NutrientList.getAll()) {
+		for (Nutrient nutrient : NutrientList.get()) {
 			this.labelList.add(label = new GuiLabel(fontRendererObj, 0, (width / 2) + labelValueHorizontalOffset, (height / 2) + labelVerticalOffset + (i * nutritionDistance), 200, 100, 0xffffffff));
 			label.addLine(nutrientData.get(nutrient) + "%%");
 			i++;

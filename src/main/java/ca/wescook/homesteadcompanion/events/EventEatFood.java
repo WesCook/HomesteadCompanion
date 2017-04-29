@@ -1,11 +1,8 @@
 package ca.wescook.homesteadcompanion.events;
 
-import ca.wescook.homesteadcompanion.capabilities.IMana;
-import ca.wescook.homesteadcompanion.capabilities.ManaProvider;
-import ca.wescook.homesteadcompanion.nutrition.common.Nutrient;
-import ca.wescook.homesteadcompanion.nutrition.common.NutrientList;
-import ca.wescook.homesteadcompanion.nutrition.server.PlayerNutrition;
-import ca.wescook.homesteadcompanion.nutrition.server.PlayerNutritionList;
+import ca.wescook.homesteadcompanion.nutrition.Nutrient;
+import ca.wescook.homesteadcompanion.nutrition.NutrientList;
+import ca.wescook.homesteadcompanion.nutrition.NutritionProvider;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -22,7 +19,8 @@ public class EventEatFood {
 	// Checks which food has been eaten, and updates nutrition
 	private void checkFoodEaten(LivingEntityUseItemEvent.Finish event) {
 		// Only run on server
-		if (event.getEntity().getEntityWorld().isRemote)
+		EntityPlayer player = (EntityPlayer) event.getEntity();
+		if (player.getEntityWorld().isRemote)
 			return;
 
 		// Get out if not food item
@@ -33,13 +31,8 @@ public class EventEatFood {
 		// Add nutrition value
 		ItemFood food = (ItemFood) event.getItem().getItem();
 		if (food.equals(Items.BEETROOT)) { // TODO: Dynamic categories - only test item
-			PlayerNutrition playerNutrition = PlayerNutritionList.getPlayerNutrition((EntityPlayer) event.getEntity()); // Get player's nutrition
 			Nutrient vegetable = NutrientList.getNutrientByName("vegetable"); // Get relevant nutrient
-			playerNutrition.add(vegetable, food.getHealAmount(null)); // Update player nutrition
+			player.getCapability(NutritionProvider.NUTRITION_CAPABILITY, null).add(vegetable, food.getHealAmount(null)); // Update player nutrition
 		}
-
-		// Add mana
-		IMana mana = event.getEntity().getCapability(ManaProvider.MANA_CAP, null);
-		mana.fill(15);
 	}
 }

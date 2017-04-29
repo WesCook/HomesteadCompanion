@@ -1,9 +1,10 @@
 package ca.wescook.homesteadcompanion.network;
 
 import ca.wescook.homesteadcompanion.gui.ModGuiHandler;
-import ca.wescook.homesteadcompanion.nutrition.common.Nutrient;
-import ca.wescook.homesteadcompanion.nutrition.common.NutrientList;
-import ca.wescook.homesteadcompanion.nutrition.server.PlayerNutritionList;
+import ca.wescook.homesteadcompanion.nutrition.INutrition;
+import ca.wescook.homesteadcompanion.nutrition.Nutrient;
+import ca.wescook.homesteadcompanion.nutrition.NutrientList;
+import ca.wescook.homesteadcompanion.nutrition.NutritionProvider;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
@@ -36,8 +37,8 @@ public class PacketNutritionResponse {
 		@Override
 		public void toBytes(ByteBuf buf) {
 			// Loop through nutrients and add to buffer
-			for (Nutrient nutrient : NutrientList.getAll())
-				buf.writeInt(PlayerNutritionList.getPlayerNutrition(serverPlayer).get(nutrient));
+			for (Nutrient nutrient : NutrientList.get())
+				buf.writeInt(serverPlayer.getCapability(NutritionProvider.NUTRITION_CAPABILITY, null).get(nutrient));
 		}
 
 		// Then deserialized (on the client)
@@ -45,7 +46,7 @@ public class PacketNutritionResponse {
 		public void fromBytes(ByteBuf buf) {
 			// Loop through nutrients to build accurate list from data
 			clientNutrients = new HashMap<Nutrient, Integer>();
-			for (Nutrient nutrient : NutrientList.getAll())
+			for (Nutrient nutrient : NutrientList.get())
 				clientNutrients.put(nutrient, buf.readInt());
 		}
 	}

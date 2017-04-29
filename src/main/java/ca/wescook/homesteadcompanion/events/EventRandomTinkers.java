@@ -25,7 +25,7 @@ public class EventRandomTinkers {
 		if (event.getEntity().getEntityWorld().isRemote)
 			return;
 
-		// If entity isn't living (mob), get out
+		// If entity isn't living (mob), getPlayerNutrition out
 		if (!(event.getEntity() instanceof EntityLiving))
 			return;
 
@@ -33,7 +33,7 @@ public class EventRandomTinkers {
 		if (!Loader.isModLoaded("tconstruct"))
 			return;
 
-		// Cast to living entity so we get some useful methods
+		// Cast to living entity so we getPlayerNutrition some useful methods
 		EntityLiving entity = (EntityLiving) event.getEntity();
 
 		// Get contents of each hand

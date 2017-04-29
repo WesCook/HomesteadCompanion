@@ -1,4 +1,4 @@
-package ca.wescook.homesteadcompanion.nutrition.common;
+package ca.wescook.homesteadcompanion.nutrition;
 
 import net.minecraft.item.ItemStack;
 
@@ -8,8 +8,8 @@ public class Nutrient {
 	public int color;
 	public ItemStack icon;
 
+	// Update object
 	Nutrient(String name, int color, ItemStack icon) {
-		// Update object
 		this.name = name;
 		this.color = color;
 		this.icon = icon;
