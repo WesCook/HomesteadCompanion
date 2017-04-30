@@ -19,7 +19,7 @@ import java.util.Map;
 public class NutritionGui extends GuiScreen {
 	private GuiButton buttonClose;
 	private GuiLabel label;
-	private Map<Nutrient, Integer> nutrientData;
+	private Map<Nutrient, Float> nutrientData;
 
 	// Magic numbers
 	private int nutritionDistance = 20; // Vertical distance between each entry
@@ -66,8 +66,8 @@ public class NutritionGui extends GuiScreen {
 		int i = 0;
 		for (Nutrient nutrient : NutrientList.get()) {
 			// Calculate percentage width for nutrition bars
-			int currentNutrient = (nutrientData != null && nutrientData.get(nutrient) != null) ? nutrientData.get(nutrient) : 0; // If null, setPlayerNutrition to 0, else getPlayerNutrition true value
-			int nutritionBarDisplayWidth = ((int) ((float) currentNutrient / 100 * nutritionBarWidth));
+			float currentNutrient = (nutrientData != null && nutrientData.get(nutrient) != null) ? nutrientData.get(nutrient) : 0; // If null, setPlayerNutrition to 0, else getPlayerNutrition true value
+			int nutritionBarDisplayWidth = (int) (currentNutrient / 100 * nutritionBarWidth);
 
 			// Draw icons
 			this.itemRender.renderItemIntoGUI(nutrient.icon, (width / 2) + nutritionIconHorizontalOffset, (height / 2) + nutritionIconVerticalOffset + (i * nutritionDistance));
@@ -134,7 +134,7 @@ public class NutritionGui extends GuiScreen {
 	}
 
 	// Called when network request is completed to setPlayerNutrition GUI data
-	public void updateInformation(Map<Nutrient, Integer> nutrientData) {
+	public void updateInformation(Map<Nutrient, Float> nutrientData) {
 		// Update nutrition info
 		this.nutrientData = nutrientData;
 

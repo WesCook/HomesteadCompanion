@@ -6,11 +6,11 @@ import java.util.Map;
 // Default implementation of Capability.  Contains logic for each method defined in the Interface.
 public class Nutrition implements INutrition {
 	// Map Nutrient type to value for that nutrient
-	private Map<Nutrient, Integer> playerNutrition = new HashMap<Nutrient, Integer>();
+	private Map<Nutrient, Float> playerNutrition = new HashMap<Nutrient, Float>();
 
 	// Constants
-	private final int STARTING_NUTRITION = 50;
-	private final int DEATH_LOSS = 15;
+	private final float STARTING_NUTRITION = 50;
+	private final float DEATH_LOSS = 15;
 
 	public Nutrition() {
 		// Populate nutrient data with starting nutrition
@@ -18,25 +18,25 @@ public class Nutrition implements INutrition {
 			playerNutrition.put(nutrient, STARTING_NUTRITION);
 	}
 
-	public Map<Nutrient, Integer> get() {
+	public Map<Nutrient, Float> get() {
 		return playerNutrition;
 	}
 
-	public Integer get(Nutrient nutrient) {
+	public Float get(Nutrient nutrient) {
 		return playerNutrition.get(nutrient);
 	}
 
-	public void set(Map<Nutrient, Integer> nutrientData) {
+	public void set(Map<Nutrient, Float> nutrientData) {
 		this.playerNutrition = nutrientData;
 	}
 
-	public void add(Nutrient nutrient, int amount) {
-		int currentAmount = playerNutrition.get(nutrient);
+	public void add(Nutrient nutrient, float amount) {
+		float currentAmount = playerNutrition.get(nutrient);
 		playerNutrition.put(nutrient, Math.min(currentAmount + amount, 100));
 	}
 
-	public void subtract(Nutrient nutrient, int amount) {
-		int currentAmount = playerNutrition.get(nutrient);
+	public void subtract(Nutrient nutrient, float amount) {
+		float currentAmount = playerNutrition.get(nutrient);
 		playerNutrition.put(nutrient, Math.max(currentAmount - amount, 0));
 	}
 

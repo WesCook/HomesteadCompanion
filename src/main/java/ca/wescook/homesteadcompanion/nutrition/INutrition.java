@@ -5,19 +5,19 @@ import java.util.Map;
 // Capability Interface that describes what methods the Implementations should understand.
 public interface INutrition {
 	// Return all nutrients
-	Map<Nutrient, Integer> get();
+	Map<Nutrient, Float> get();
 
 	// Return specific nutrient
-	Integer get(Nutrient nutrient);
+	Float get(Nutrient nutrient);
 
 	// Overwrite all nutrients
-	void set(Map<Nutrient, Integer> nutrientData);
+	void set(Map<Nutrient, Float> nutrientData);
 
 	// Increase nutrition
-	void add(Nutrient nutrient, int amount);
+	void add(Nutrient nutrient, float amount);
 
 	// Decrease nutrition
-	void subtract(Nutrient nutrient, int amount);
+	void subtract(Nutrient nutrient, float amount);
 
 	// Penalize all skills on death
 	void deathPenalty();

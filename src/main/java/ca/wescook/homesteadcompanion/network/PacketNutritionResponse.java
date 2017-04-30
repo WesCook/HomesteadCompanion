@@ -23,7 +23,7 @@ public class PacketNutritionResponse {
 		EntityPlayer serverPlayer;
 
 		// Client vars only
-		Map<Nutrient, Integer> clientNutrients;
+		Map<Nutrient, Float> clientNutrients;
 
 		public Message() {}
 
@@ -37,16 +37,16 @@ public class PacketNutritionResponse {
 		public void toBytes(ByteBuf buf) {
 			// Loop through nutrients and add to buffer
 			for (Nutrient nutrient : NutrientList.get())
-				buf.writeInt(serverPlayer.getCapability(NutritionProvider.NUTRITION_CAPABILITY, null).get(nutrient));
+				buf.writeFloat(serverPlayer.getCapability(NutritionProvider.NUTRITION_CAPABILITY, null).get(nutrient));
 		}
 
 		// Then deserialized (on the client)
 		@Override
 		public void fromBytes(ByteBuf buf) {
 			// Loop through nutrients to build accurate list from data
-			clientNutrients = new HashMap<Nutrient, Integer>();
+			clientNutrients = new HashMap<Nutrient, Float>();
 			for (Nutrient nutrient : NutrientList.get())
-				clientNutrients.put(nutrient, buf.readInt());
+				clientNutrients.put(nutrient, buf.readFloat());
 		}
 	}
 
