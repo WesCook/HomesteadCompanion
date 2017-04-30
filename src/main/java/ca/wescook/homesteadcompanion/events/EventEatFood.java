@@ -31,7 +31,7 @@ public class EventEatFood {
 		// Add nutrition value
 		ItemFood food = (ItemFood) event.getItem().getItem();
 		if (food.equals(Items.BEETROOT)) { // TODO: Dynamic categories - only test item
-			Nutrient vegetable = NutrientList.getNutrientByName("vegetable"); // Get relevant nutrient
+			Nutrient vegetable = NutrientList.get("vegetable"); // Get relevant nutrient
 			player.getCapability(NutritionProvider.NUTRITION_CAPABILITY, null).add(vegetable, food.getHealAmount(null)); // Update player nutrition
 		}
 	}

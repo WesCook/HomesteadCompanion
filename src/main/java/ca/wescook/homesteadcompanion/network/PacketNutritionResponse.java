@@ -1,7 +1,6 @@
 package ca.wescook.homesteadcompanion.network;
 
 import ca.wescook.homesteadcompanion.gui.ModGuiHandler;
-import ca.wescook.homesteadcompanion.nutrition.INutrition;
 import ca.wescook.homesteadcompanion.nutrition.Nutrient;
 import ca.wescook.homesteadcompanion.nutrition.NutrientList;
 import ca.wescook.homesteadcompanion.nutrition.NutritionProvider;

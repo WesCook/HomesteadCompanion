@@ -31,7 +31,7 @@ public class CommonProxy {
 	}
 
 	public void postInit(FMLPostInitializationEvent event) {
-		MinecraftForge.EVENT_BUS.register(new EventPlayerClone()); // Player player login, logout, death
+		MinecraftForge.EVENT_BUS.register(new EventPlayerClone()); // Player death and warping
 		MinecraftForge.EVENT_BUS.register(new EventRandomTinkers()); // Register entity spawn event
 		MinecraftForge.EVENT_BUS.register(new EventEatFood()); // Register use item event
 	}

@@ -11,8 +11,13 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class EventPlayerAttachCapability {
 	@SubscribeEvent
 	public void AttachCapabilitiesEvent(AttachCapabilitiesEvent<Entity> event) {
-		// Attach capability to player
 		Entity entity = event.getObject();
+
+		// Only run on server
+		if (entity.getEntityWorld().isRemote)
+			return;
+
+		// Attach capability to player
 		if (entity instanceof EntityPlayer)
 			event.addCapability(new ResourceLocation(HomesteadCompanion.MODID, "nutrition"), new NutritionProvider());
 	}

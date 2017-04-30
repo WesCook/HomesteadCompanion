@@ -16,14 +16,12 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public void preInit(FMLPreInitializationEvent event) {
 		super.preInit(event);
-
 		ModItems.renderItems(); // Client-side rendering
 	}
 
 	@Override
 	public void init(FMLInitializationEvent event) {
 		super.init(event);
-
 		ClientRegistry.registerKeyBinding(keyNutritionGui = new KeyBinding("key.nutrition", 49, "Homestead")); // Register Nutrition keybind, default to "N"
 		MinecraftForge.EVENT_BUS.register(new EventNutritionKey()); // Register key input event to respond to keybind
 	}
@@ -31,7 +29,6 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public void postInit(FMLPostInitializationEvent event) {
 		super.postInit(event);
-
 		MinecraftForge.EVENT_BUS.register(new EventNutritionButton()); // Register GUI events
 	}
 }

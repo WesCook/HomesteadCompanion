@@ -2,7 +2,6 @@ package ca.wescook.homesteadcompanion.nutrition;
 
 import jline.internal.Nullable;
 import net.minecraft.nbt.NBTBase;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
@@ -18,6 +17,7 @@ public class NutritionProvider implements ICapabilitySerializable<NBTBase> {
 	// Create default instance
 	private INutrition instance = NUTRITION_CAPABILITY.getDefaultInstance();
 
+	// Check if capability exists
 	@Override
 	public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
 		if (capability == NUTRITION_CAPABILITY)
@@ -25,18 +25,21 @@ public class NutritionProvider implements ICapabilitySerializable<NBTBase> {
 		return false;
 	}
 
+	// Return capability instance
 	@Override
 	public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
 		if (capability == NUTRITION_CAPABILITY)
-			return  NUTRITION_CAPABILITY.cast(instance);
+			return NUTRITION_CAPABILITY.cast(instance);
 		return null;
 	}
 
+	// Serialize and write NBT
 	@Override
 	public NBTBase serializeNBT() {
 		return NUTRITION_CAPABILITY.getStorage().writeNBT(NUTRITION_CAPABILITY, instance, null);
 	}
 
+	// Deserialize and read NBT
 	@Override
 	public void deserializeNBT(NBTBase nbt) {
 		NUTRITION_CAPABILITY.getStorage().readNBT(NUTRITION_CAPABILITY, instance, null, nbt);

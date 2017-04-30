@@ -23,7 +23,7 @@ public class EventNutritionButton {
 	@SubscribeEvent
 	@SideOnly(Side.CLIENT)
 	public void guiOpen(GuiScreenEvent.InitGuiEvent.Post event) {
-		// If any inventory except player inventory is opened, getPlayerNutrition out
+		// If any inventory except player inventory is opened, get out
 		GuiScreen gui = event.getGui();
 		if (!(gui instanceof GuiInventory))
 			return;

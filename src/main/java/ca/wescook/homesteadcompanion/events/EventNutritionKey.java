@@ -21,7 +21,8 @@ public class EventNutritionKey {
 			return;
 		}
 
-		if (Keyboard.getEventKey() == ClientProxy.keyNutritionGui.getKeyCode()) {
+		// If Nutrition key is pressed, and F3 key is not being held (F3+N toggles Spectator mode)
+		if (Keyboard.getEventKey() == ClientProxy.keyNutritionGui.getKeyCode() && !Keyboard.isKeyDown(Keyboard.KEY_F3)) {
 			openNutritionGui();
 		}
 	}

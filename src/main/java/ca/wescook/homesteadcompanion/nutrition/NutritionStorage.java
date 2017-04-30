@@ -9,6 +9,7 @@ import java.util.HashMap;
 
 // Saves and loads serialized data from disk
 public class NutritionStorage implements Capability.IStorage<INutrition> {
+	// Save serialized data to disk
 	@Override
 	public NBTBase writeNBT(Capability<INutrition> capability, INutrition instance, EnumFacing side) {
 		NBTTagCompound playerData = new NBTTagCompound();
@@ -17,16 +18,14 @@ public class NutritionStorage implements Capability.IStorage<INutrition> {
 		return playerData;
 	}
 
+	// Load serialized data from disk
 	@Override
 	public void readNBT(Capability<INutrition> capability, INutrition instance, EnumFacing side, NBTBase nbt) {
-		// Loop through nutrients to build accurate list from data
-		HashMap<Nutrient, Integer> clientNutrients = new HashMap<Nutrient, Integer>();
+		HashMap<Nutrient, Integer> clientNutrients = new HashMap<Nutrient, Integer>(); // Create new map
 		for (Nutrient nutrient : NutrientList.get()) {
-			Integer value = ((NBTTagCompound) nbt).getInteger(nutrient.name);
-			clientNutrients.put(nutrient, value);
+			Integer value = ((NBTTagCompound) nbt).getInteger(nutrient.name); // Read ints from packet
+			clientNutrients.put(nutrient, value); // Add to map
 		}
-
-		// Replace nutrient data
-		instance.set(clientNutrients);
+		instance.set(clientNutrients); // Replace nutrient data wih map
 	}
 }

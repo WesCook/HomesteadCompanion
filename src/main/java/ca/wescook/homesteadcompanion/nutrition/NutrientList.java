@@ -26,7 +26,7 @@ public class NutrientList {
 	}
 
 	// Return nutrient by name (null if not found)
-	public static Nutrient getNutrientByName(String name) {
+	public static Nutrient get(String name) {
 		for (Nutrient nutrient : nutrients) {
 			if (nutrient.name.equals(name))
 				return nutrient;
