@@ -12,8 +12,7 @@ import static ca.wescook.homesteadcompanion.HomesteadCompanion.MODID;
 import static ca.wescook.homesteadcompanion.HomesteadCompanion.MODNAME;
 
 @Mod(modid = MODID, name = MODNAME, version = "@VERSION@")
-public class HomesteadCompanion
-{
+public class HomesteadCompanion {
 	public static final String MODID = "homesteadcompanion";
 	public static final String MODNAME = "Homestead Companion";
 
@@ -41,5 +40,4 @@ public class HomesteadCompanion
 	public void postInit(FMLPostInitializationEvent event) {
 		HomesteadCompanion.proxy.postInit(event);
 	}
-
 }

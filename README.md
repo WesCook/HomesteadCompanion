@@ -13,6 +13,10 @@ An addon mod to bridge compatibility in the Homestead modpack.
 
 ## Changelog
 
+[v1.4](https://github.com/WesCook/homestead-companion/releases/tag/v1.4) - 2017-04-30
+
+* Moving nutrition system to standalone mod
+
 [v1.3](https://github.com/WesCook/homestead-companion/releases/tag/v1.3) - 2017-04-22
 
 * Added item that generates randomized Tinkers Construct weapon when given to a player or mob

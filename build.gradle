@@ -19,7 +19,7 @@ configFile.withReader {
 }
 
 version = config.minecraft_version + "-" + config.mod_version
-group= "ca.wescook.homesteadcompanion" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+group= "ca.wescook.homesteadcompanion"
 archivesBaseName = "HomesteadCompanion"
 
 sourceCompatibility = targetCompatibility = "1.6" // Need this here so eclipse task generates correctly.

@@ -1,18 +1,3 @@
-# Items
-item.homesteadcompanion:random_tinkers.name=Random Tinkers Tool
-
-# Keys
-key.nutrition=Open Nutrition GUI
-
-# GUI
-gui.homesteadcompanion:nutrition_title=Nutrition
-
-# Nutrients
-nutrient.homesteadcompanion:grain=Grain
-nutrient.homesteadcompanion:fruit=Fruit
-nutrient.homesteadcompanion:vegetable=Vegetable
-nutrient.homesteadcompanion:protein=Protein
-nutrient.homesteadcompanion:dairy=Dairy
-
-# Random Tinkers
-tooltip.homesteadcompanion:random_tinkers=Transforms into a random Tinkers Construct weapon
+# Random Tinkers Weapon
+item.homesteadcompanion:random_tinkers.name=Random Tinkers Weapon
+tooltip.homesteadcompanion:random_tinkers=Transforms into a randomly generated Tinkers Construct weapon
