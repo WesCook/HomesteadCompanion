@@ -5,7 +5,7 @@
   "description": "An addon mod to bridge compatibility in the Homestead modpack.",
   "version": "${version}",
   "mcversion": "${mcversion}",
-  "url": "https://github.com/WesCook/homestead-companion",
+  "url": "https://github.com/WesCook/HomesteadCompanion",
   "updateUrl": "",
   "authorList": ["Wes Cook"],
   "credits": "",
