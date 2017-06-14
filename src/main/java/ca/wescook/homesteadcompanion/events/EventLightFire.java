@@ -7,9 +7,11 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.Loader;
@@ -28,13 +30,17 @@ public class EventLightFire {
 		ItemStack stack = event.getItemStack();
 		EntityPlayer player = event.getEntityPlayer();
 		IBlockState blockState = world.getBlockState(event.getPos());
+		Block block = blockState.getBlock();
 
-		// If item is used on campfire
-		if (Loader.isModLoaded("ToughAsNails") && blockState.getBlock().equals(Block.getBlockFromName("ToughAsNails:campfire")))
+		// If item is used on campfire, craft new item
+		if (Loader.isModLoaded("ToughAsNails") && block.equals(Block.getBlockFromName("ToughAsNails:campfire")))
 			campfireCraft(event, world, player, stack, blockState);
-		// If item is used on unlit torch
-		else if (Loader.isModLoaded("RealisticTorches") && blockState.getBlock().equals(Block.getBlockFromName("RealisticTorches:TorchUnlit")))
+		// If lit torch is used on unlit torch, relight in world
+		else if (Loader.isModLoaded("RealisticTorches") && block.equals(Block.getBlockFromName("RealisticTorches:TorchUnlit")))
 			relightTorchOnGround(event, world, player, stack, blockState);
+		// If unlit torch is used on lit torch, relight in hand
+		else if (Loader.isModLoaded("RealisticTorches") && (block.equals(Block.getBlockFromName("RealisticTorches:TorchLit")) || block.equals(Blocks.TORCH)))
+			relightTorchInHand(event, world, player, stack);
 	}
 
 	private void campfireCraft(PlayerInteractEvent.RightClickBlock event, World world, EntityPlayer player, ItemStack stack, IBlockState blockState) {
@@ -43,6 +49,7 @@ public class EventLightFire {
 
 		// Add entries
 		campfireItems.put(Item.getItemFromBlock(Blocks.SAND), Items.GLASS_BOTTLE); // Cooking sand into glass
+		campfireItems.put(Item.getByNameOrId("ToughAsNails:water_bottle"), Items.POTIONITEM); // Cooking water directly into safe water
 		if (Loader.isModLoaded("RealisticTorches")) { // Light realistic torches
 			campfireItems.put(Items.STICK, Item.getByNameOrId("RealisticTorches:TorchLit")); // Turn sticks into lit torches
 			campfireItems.put(Item.getByNameOrId("RealisticTorches:TorchUnlit"), Item.getByNameOrId("RealisticTorches:TorchLit")); // Turn unlit torches into lit torches
@@ -65,6 +72,9 @@ public class EventLightFire {
 				// Cancel block place event
 				if (event.isCancelable())
 					event.setCanceled(true);
+
+				// Cook sound
+				world.playSound(player, player.posX, player.posY, player.posZ, SoundEvents.BLOCK_FIRE_AMBIENT, SoundCategory.BLOCKS, 1.0F, 1.0F);
 
 				// Only on server
 				if (!world.isRemote) {
@@ -96,6 +106,9 @@ public class EventLightFire {
 		if (facing != null)
 			world.setBlockState(event.getPos(), Block.getBlockFromItem(litTorch).getDefaultState().withProperty(FACING, facing)); // Replace torch with rotation applied
 
+		// Play fire sound
+		world.playSound(player, player.posX, player.posY, player.posZ, SoundEvents.BLOCK_FURNACE_FIRE_CRACKLE, SoundCategory.BLOCKS, 1.0F, 1.0F);
+
 		// Reduce durability of matchbox
 		if (stack.getItem().equals(matchbox))
 			stack.damageItem(1, player);
@@ -103,6 +116,33 @@ public class EventLightFire {
 		// Cancel block place event
 		if (event.isCancelable())
 			event.setCanceled(true);
+	}
+
+	private void relightTorchInHand(PlayerInteractEvent.RightClickBlock event, World world, EntityPlayer player, ItemStack stack) {
+		// Get item instances (should never be null due to mod loaded check above)
+		Item litTorch = Item.getByNameOrId("RealisticTorches:TorchLit");
+		Item unlitTorch = Item.getByNameOrId("RealisticTorches:TorchUnlit");
+
+		// Get out if not igniting an unlit torch
+		if (stack == null || !stack.getItem().equals(unlitTorch))
+			return;
+
+		// Cancel block place event
+		if (event.isCancelable())
+			event.setCanceled(true);
+
+		// Fire sound
+		world.playSound(player, player.posX, player.posY, player.posZ, SoundEvents.BLOCK_FURNACE_FIRE_CRACKLE, SoundCategory.BLOCKS, 1.0F, 1.0F);
+
+		// Only on server
+		if (!world.isRemote) {
+			// Remove unlit torch
+			if (!player.isCreative())
+				--stack.stackSize;
+
+			// New lit torch
+			player.inventory.addItemStackToInventory(new ItemStack(litTorch));
+		}
 	}
 
 	// Iterate through properties looking for string and return value
