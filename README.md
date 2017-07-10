@@ -14,6 +14,10 @@ An addon mod to bridge compatibility in the [Homestead modpack](https://github.c
 
 ## Changelog
 
+[v1.6](https://github.com/WesCook/HomesteadCompanion/releases/tag/v1.6) - 2017-07-10
+
+* Smoldering torches can now be relit
+
 [v1.5](https://github.com/WesCook/HomesteadCompanion/releases/tag/v1.5) - 2017-06-14
 
 * Unlit torches can now be lit in your hand
