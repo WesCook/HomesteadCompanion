@@ -36,7 +36,7 @@ public class EventLightFire {
 		if (Loader.isModLoaded("ToughAsNails") && block.equals(Block.getBlockFromName("ToughAsNails:campfire")))
 			campfireCraft(event, world, player, stack, blockState);
 		// If lit torch is used on unlit torch, relight in world
-		else if (Loader.isModLoaded("RealisticTorches") && block.equals(Block.getBlockFromName("RealisticTorches:TorchUnlit")))
+		else if (Loader.isModLoaded("RealisticTorches") && (block.equals(Block.getBlockFromName("RealisticTorches:TorchUnlit")) || block.equals(Block.getBlockFromName("RealisticTorches:TorchSmoldering"))))
 			relightTorchOnGround(event, world, player, stack, blockState);
 		// If unlit torch is used on lit torch, relight in hand
 		else if (Loader.isModLoaded("RealisticTorches") && (block.equals(Block.getBlockFromName("RealisticTorches:TorchLit")) || block.equals(Blocks.TORCH)))
